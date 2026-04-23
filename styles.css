@@ -579,3 +579,51 @@ footer a:hover{color:#fff}
 /* Utility */
 .eye-br{color:var(--purple-600);font-weight:600}
 .glowdot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px rgba(126,215,184,.25);animation:pulse 1.6s ease-in-out infinite;display:inline-block}
+
+/* Feature carousel (mobile) */
+.feat-dots{display:none}
+@media (max-width:860px){
+  .feat-grid{
+    display:flex;
+    overflow-x:auto;
+    overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    gap:14px;
+    margin:0 -18px;
+    padding:4px 18px 20px;
+    scroll-padding-left:18px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .feat-grid::-webkit-scrollbar{display:none}
+  .feat,.feat.third,.feat.wide{
+    flex:0 0 calc(100% - 56px);
+    min-width:0;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  .feat:hover{transform:none}
+  .feat-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+  }
+  .feat-dot{
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--line);
+    border:0;padding:0;
+    cursor:pointer;
+    transition:background .2s ease, width .2s ease, border-radius .2s ease;
+  }
+  .feat-dot:hover{background:var(--purple-300)}
+  .feat-dot.active{
+    background:var(--purple-600);
+    width:24px;
+    border-radius:4px;
+  }
+  [data-theme="dark"] .feat-dot{background:var(--line)}
+  [data-theme="dark"] .feat-dot.active{background:var(--purple-500)}
+}

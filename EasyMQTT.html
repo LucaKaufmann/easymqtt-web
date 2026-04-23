@@ -739,6 +739,67 @@
     renderTerminal();
   }, 1800);
 
+  // FEATURE CAROUSEL (mobile) — dots follow scroll-snap position
+  var featGrid = document.querySelector('.feat-grid');
+  if (featGrid){
+    var featCards = Array.prototype.slice.call(featGrid.querySelectorAll('.feat'));
+    var dotsEl = document.createElement('div');
+    dotsEl.className = 'feat-dots';
+    dotsEl.setAttribute('role', 'tablist');
+    dotsEl.setAttribute('aria-label', 'Feature carousel');
+
+    featCards.forEach(function(card, i){
+      var d = document.createElement('button');
+      d.className = 'feat-dot';
+      d.type = 'button';
+      d.setAttribute('role', 'tab');
+      d.setAttribute('aria-label', 'Feature ' + (i + 1));
+      d.addEventListener('click', function(){ scrollToCard(i); });
+      dotsEl.appendChild(d);
+    });
+    featGrid.parentNode.insertBefore(dotsEl, featGrid.nextSibling);
+    var dots = Array.prototype.slice.call(dotsEl.querySelectorAll('.feat-dot'));
+
+    function scrollToCard(i){
+      var card = featCards[i];
+      if (!card) return;
+      var left = card.offsetLeft - featGrid.offsetLeft;
+      featGrid.scrollTo({ left: left, behavior: 'smooth' });
+    }
+
+    function currentIndex(){
+      var gridRect = featGrid.getBoundingClientRect();
+      var anchor = gridRect.left + 24;
+      var best = 0, bestDist = Infinity;
+      for (var i = 0; i < featCards.length; i++){
+        var r = featCards[i].getBoundingClientRect();
+        var dist = Math.abs(r.left - anchor);
+        if (dist < bestDist){ bestDist = dist; best = i; }
+      }
+      return best;
+    }
+
+    function updateDots(){
+      var active = currentIndex();
+      for (var i = 0; i < dots.length; i++){
+        dots[i].classList.toggle('active', i === active);
+        dots[i].setAttribute('aria-selected', i === active ? 'true' : 'false');
+      }
+    }
+
+    var rafQueued = false;
+    featGrid.addEventListener('scroll', function(){
+      if (rafQueued) return;
+      rafQueued = true;
+      requestAnimationFrame(function(){
+        rafQueued = false;
+        updateDots();
+      });
+    }, { passive: true });
+    window.addEventListener('resize', updateDots);
+    updateDots();
+  }
+
   // SUPPORT TABS
   var tabs = document.querySelector('[data-tabs]');
   if (tabs){
