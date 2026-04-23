@@ -800,6 +800,73 @@
     updateDots();
   }
 
+  // REMOTE FAQ — same JSON as the iOS app; falls back to hardcoded content
+  (function loadRemoteFaqs(){
+    var ENDPOINT = 'https://lucakaufmann.github.io/easymqtt/en.json';
+    var CACHE_KEY = 'emqtt-faq-v1';
+    var CACHE_TTL = 10 * 60 * 1000;
+
+    function escapeHtml(s){
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function md(text){
+      var out = escapeHtml(text);
+      out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, t, u){
+        var safeUrl = /^(https?:|mailto:)/i.test(u) ? u : '#';
+        return '<a href="' + safeUrl + '" target="_blank" rel="noopener">' + t + '</a>';
+      });
+      out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return out;
+    }
+
+    function render(faqSections){
+      var panel = document.querySelector('[data-tab-panel="faq"]');
+      if (!panel || !Array.isArray(faqSections) || !faqSections.length) return;
+      var firstFlagged = false;
+      var html = faqSections.map(function(section){
+        if (!section || !Array.isArray(section.items) || !section.items.length) return '';
+        var heading = (faqSections.length > 1 && section.title)
+          ? '<div class="faq-section-title">' + escapeHtml(section.title) + '</div>'
+          : '';
+        var items = section.items.map(function(item){
+          var open = firstFlagged ? '' : ' open';
+          firstFlagged = true;
+          return '<details class="faq-item"' + open + '>'
+            + '<summary><span>' + escapeHtml(item.title) + '</span><span class="plus">+</span></summary>'
+            + '<div class="body">' + md(item.text || '') + '</div>'
+            + '</details>';
+        }).join('');
+        return heading + items;
+      }).join('');
+      if (html) panel.innerHTML = html;
+    }
+
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && cached.ts && Date.now() - cached.ts < CACHE_TTL && cached.data){
+        render(cached.data);
+      }
+    } catch (e) {}
+
+    fetch(ENDPOINT, { cache: 'no-cache' })
+      .then(function(r){ return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function(t){ return JSON.parse(t); })
+      .then(function(data){
+        if (!data || !Array.isArray(data.faqSections)) return;
+        render(data.faqSections);
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data.faqSections }));
+        } catch (e) {}
+      })
+      .catch(function(err){
+        console.warn('Remote FAQs unavailable, using fallback:', err);
+      });
+  })();
+
   // SUPPORT TABS
   var tabs = document.querySelector('[data-tabs]');
   if (tabs){
