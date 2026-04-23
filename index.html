@@ -62,7 +62,7 @@
     </a>
     <div class="nav-links" data-nav-links>
       <a href="#features">Features</a>
-      <a href="#automation">Automation</a>
+      <a href="#automation">Workflows</a>
       <a href="#plus">Plus</a>
       <a href="#support">Support</a>
       <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="nav-cta">
@@ -90,16 +90,16 @@
     <div>
       <div class="eyebrow">
         <span class="pill">NEW · 1.24.0</span>
-        Broker locations &amp; automation fixes
+        Suggested Broker, widgets, and smarter mobile workflows
       </div>
       <h1>
-        Put MQTT in<br/>
+        Monitor, control, and graph MQTT from<br/>
         <span class="serif">your pocket.</span>
       </h1>
       <p class="hero-sub">
-        A beautiful, friendly MQTT client for iPhone, iPad, and Mac.
-        Connect to any broker, watch topics live, and automate your home
-        with Siri Shortcuts and widgets.
+        EasyMQTT is a mobile MQTT client for iPhone, iPad, and Mac.
+        Connect securely with MQTT 3.1.1, MQTT 5, WebSockets, TLS, and client certificates,
+        watch topics live, publish commands fast, and build widgets and Shortcuts around your data.
       </p>
       <div class="hero-ctas">
         <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="btn-app-store">
@@ -109,10 +109,10 @@
             <span class="big">App Store</span>
           </span>
         </a>
-        <a href="#features" class="btn-ghost btn-ghost-sm">Explore features <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></a>
+        <a href="#features" class="btn-ghost btn-ghost-sm">See how it works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></a>
       </div>
       <div class="hero-meta">
-        <span><span class="glowdot"></span> iOS 16+ · iPadOS · macOS</span>
+        <span><span class="glowdot"></span> MQTT 3.1.1 · MQTT 5 · WebSockets · TLS</span>
         <span>★ 4.8 · 10,000+ users</span>
         <span>v1.24.0</span>
       </div>
@@ -137,7 +137,7 @@
         </div>
       </div>
       <div class="ticker-card hero-float-3" data-ticker="3">
-        <div class="t-label">⚡ Shortcut · Send</div>
+        <div class="t-label">⚡ Shortcut · Publish</div>
         <div class="t-row">
           <span class="t-topic" data-ticker-topic></span>
           <span class="t-val" data-ticker-val></span>
@@ -151,7 +151,7 @@
 <div class="stats wrap" style="max-width:1240px">
   <div class="stat">
     <div class="num">10k+</div>
-    <div class="lbl">Active users</div>
+    <div class="lbl">Downloads and installs</div>
   </div>
   <div class="stat">
     <div class="num">4.8★</div>
@@ -159,11 +159,11 @@
   </div>
   <div class="stat">
     <div class="num">3</div>
-    <div class="lbl">Languages</div>
+    <div class="lbl">Languages supported</div>
   </div>
   <div class="stat">
     <div class="num">3</div>
-    <div class="lbl">Platforms supported</div>
+    <div class="lbl">Apple platforms</div>
   </div>
 </div>
 
@@ -173,18 +173,19 @@
     <div class="section-head">
       <div class="section-kicker">Features</div>
       <h2 class="section-title">
-        Everything you need from an MQTT client, <span class="serif">nothing you don't.</span>
+        Built for real MQTT work, <span class="serif">not just demos.</span>
       </h2>
       <p class="section-lede">
-        EasyMQTT ships the essentials of a great MQTT client — connect, subscribe, publish —
-        plus the iOS‑native touches that make it a joy to use every day.
+        EasyMQTT gives you the workflows that matter on mobile: secure broker access,
+        live topic monitoring, fast publishes, reusable favorites, and glanceable dashboards
+        on the Apple devices you already carry.
       </p>
     </div>
     <div class="feat-grid">
       <div class="feat" style="grid-column:span 6">
         <div class="tag"><span class="dot"></span>Connect</div>
-        <h3>Connect to any MQTT broker</h3>
-        <p>Plug in a URL, username, and password — or scan a recent broker on your network. Save multiple brokers, switch in a tap, and pick MQTT 3.1.1 or 5.0.</p>
+        <h3>Connect securely to real brokers</h3>
+        <p>Save brokers with MQTT 3.1.1 or 5.0, raw MQTT or WebSockets, TLS/SSL, imported PKCS#12 client certificates, and per-broker credentials. Switch sites in a tap.</p>
         <div class="feat-visual">
           <div class="feat-phone">
             <img data-feat-shot="assets/raw-iphone-connect.png" src="assets/raw-iphone-connect.png" alt="Connect to any MQTT broker"/>
@@ -193,8 +194,8 @@
       </div>
       <div class="feat" style="grid-column:span 6">
         <div class="tag"><span class="dot"></span>Subscribe</div>
-        <h3>See every message, the moment it arrives</h3>
-        <p>Subscribe to wildcards, star your favorites, and watch messages stream in with full payload history and JSON pretty‑printing.</p>
+        <h3>Inspect every message as it arrives</h3>
+        <p>Subscribe with wildcards, save favorite topics, filter by QoS and retained state, and inspect JSON payloads with readable formatting when you need to debug fast.</p>
         <div class="feat-visual">
           <div class="feat-phone">
             <img data-feat-shot="assets/raw-iphone-subscribe.png" src="assets/raw-iphone-subscribe.png" alt="See every message, the moment it arrives"/>
@@ -203,8 +204,8 @@
       </div>
       <div class="feat third" style="grid-column:span 4">
         <div class="tag"><span class="dot"></span>Publish</div>
-        <h3>Publish in a tap</h3>
-        <p>Save recurring payloads as favorites. Set QoS, retain, and fire it off — perfect for toggling lights, scenes, or Zigbee2MQTT commands.</p>
+        <h3>Publish commands without friction</h3>
+        <p>Send one-off messages or save repeatable commands as favorites. Set QoS and retain, then fire off device actions, scene changes, test payloads, or Zigbee2MQTT commands in seconds.</p>
         <div class="feat-visual">
           <div class="feat-phone">
             <img data-feat-shot="assets/raw-iphone-publish.png" src="assets/raw-iphone-publish.png" alt="Publish in a tap"/>
@@ -213,8 +214,8 @@
       </div>
       <div class="feat third" style="grid-column:span 4">
         <div class="tag"><span class="dot"></span>Widgets</div>
-        <h3>Live data on your Home Screen</h3>
-        <p>Graph widgets turn your MQTT topics into sparklines you can glance at. Temperature, humidity, energy — without opening the app.</p>
+        <h3>Turn topics into mobile dashboards</h3>
+        <p>Build graph and multi-graph widgets for sensor data like temperature, humidity, energy, and production metrics. See the numbers that matter without reopening the app.</p>
         <div class="feat-visual">
           <div class="feat-phone">
             <img data-feat-shot="assets/raw-iphone-widgets.png" src="assets/raw-iphone-widgets.png" alt="Live data on your Home Screen"/>
@@ -223,8 +224,8 @@
       </div>
       <div class="feat third" style="grid-column:span 4">
         <div class="tag"><span class="dot"></span>Locations</div>
-        <h3>Brokers know where they live</h3>
-        <p>Tag brokers by location so EasyMQTT can suggest the right one when you're home, at work, or on the road. New in 1.14.</p>
+        <h3>Pick the right broker for the place</h3>
+        <p>Save where a broker is usually used, keep a connection history on device, and let Suggested Broker surface the nearest saved broker when you're on site.</p>
         <div class="feat-visual">
           <div class="feat-phone">
             <img data-feat-shot="assets/raw-iphone-locations.png" src="assets/raw-iphone-locations.png" alt="Brokers know where they live"/>
@@ -240,14 +241,13 @@
   <div class="spotlight">
     <div class="wrap" style="padding:0; max-width:1160px">
       <div style="max-width:680px">
-        <div class="section-kicker">Automation</div>
+        <div class="section-kicker">Workflows</div>
         <h2>
-          Siri. Shortcuts. Widgets. <span class="serif">All MQTT‑native.</span>
+          Shortcuts, widgets, and fast actions. <span class="serif">All MQTT‑native.</span>
         </h2>
         <p class="section-lede">
-          Publish a message with "Hey Siri." Build an automation that dims the lights at sunset.
-          Pin a live sensor to your Home Screen. EasyMQTT plugs MQTT into the iOS
-          automation fabric — and stays out of the way.
+          Publish with Siri, fetch retained state into Shortcuts, and pin MQTT data to your Home Screen.
+          EasyMQTT plugs brokers, topics, and payloads into the Apple automation stack without making you build around a cloud relay first.
         </p>
       </div>
       <div class="spot-grid">
@@ -292,7 +292,7 @@
     <div class="section-head">
       <div class="section-kicker">Who uses it</div>
       <h2 class="section-title">
-        Home automators, makers, <span class="serif">and industrial pros.</span>
+        Home automators, field engineers, <span class="serif">and industrial teams.</span>
       </h2>
     </div>
     <div class="case-grid">
@@ -301,7 +301,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1z"/></svg>
         </div>
         <h3>Home automation</h3>
-        <p>Pipe Home Assistant, Zigbee2MQTT, or esphome straight into your phone. One app for every broker in the house.</p>
+        <p>Connect Home Assistant, Zigbee2MQTT, and ESPHome topics to a mobile control panel you can actually use every day.</p>
         <ul>
           <li><span>Home Assistant</span><span>MQTT statestream</span></li>
           <li><span>Zigbee2MQTT</span><span>zigbee2mqtt/#</span></li>
@@ -313,11 +313,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 21V10l6 4V10l6 4V6l6 4v11z"/><path d="M8 17h.01M12 17h.01M16 17h.01"/></svg>
         </div>
         <h3>Remote monitoring</h3>
-        <p>Keep an eye on production lines, sensors, and gateways from the couch. Graph widgets for the numbers that matter.</p>
+        <p>Check production lines, gateways, HVAC systems, and sensor fleets from the field. Perfect for quick diagnostics, live checks, and glanceable dashboards on iPhone and iPad.</p>
         <ul>
-          <li><span>Latency</span><span>&lt; 200 ms</span></li>
-          <li><span>QoS</span><span>0 / 1 / 2</span></li>
-          <li><span>Keep-alive</span><span>60 s</span></li>
+          <li><span>Common data</span><span>temperature / humidity / power</span></li>
+          <li><span>Protocols</span><span>MQTT / WebSockets</span></li>
+          <li><span>Security</span><span>TLS / certificates</span></li>
         </ul>
       </div>
       <div class="case">
@@ -325,11 +325,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><rect x="7" y="8" width="10" height="12" rx="5"/><path d="M10 8V5a2 2 0 014 0v3M5 12h2m10 0h2M4 8l2 2m12-2l-2 2M4 18l2-1m12 1l-2-1"/></svg>
         </div>
         <h3>MQTT debugging</h3>
-        <p>The quickest way to sniff a topic, test a payload, or double‑check a retained message before you commit.</p>
+        <p>Use EasyMQTT when you need to sniff a topic, verify a retained state, test a command payload, or confirm a broker is behaving before you leave site.</p>
         <ul>
-          <li><span>Wildcards</span><span># + +</span></li>
-          <li><span>Retain</span><span>supported</span></li>
-          <li><span>TLS</span><span>optional</span></li>
+          <li><span>Wildcards</span><span># +</span></li>
+          <li><span>Retained messages</span><span>inspect and publish</span></li>
+          <li><span>JSON payloads</span><span>readable in app</span></li>
         </ul>
       </div>
     </div>
@@ -346,15 +346,15 @@
       </div>
       <div class="p">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M11 18h2"/></svg>
-        <h4>iPad</h4><p>iPadOS 16+ · Split View</p>
+        <h4>iPad</h4><p>iPadOS 16+ · ideal for dashboards and message review</p>
       </div>
       <div class="p">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="13" rx="1.5"/><path d="M8 21h8m-5-4v4m-2 0h6"/></svg>
-        <h4>Mac</h4><p>Catalyst · Apple Silicon</p>
+        <h4>Mac</h4><p>Mac Catalyst · same broker, publish, and monitoring workflows</p>
       </div>
       <div class="p">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="2.5"/><path d="M9 6l1-3h4l1 3M9 18l1 3h4l1-3"/></svg>
-        <h4>Shortcuts</h4><p>Runs on Watch via Shortcuts</p>
+        <h4>Shortcuts</h4><p>Send and fetch MQTT data inside Apple Shortcuts</p>
       </div>
     </div>
   </div>
@@ -366,11 +366,11 @@
     <div class="plus-card">
       <div>
         <div class="section-kicker" style="color:var(--purple-700)">EasyMQTT Plus</div>
-        <h2>Unlock the <span class="serif">power user</span> features.</h2>
+        <h2>Unlock the <span class="serif">power user</span> workflows.</h2>
         <p class="sub">
-          EasyMQTT is free and fully usable. Plus is a one‑time in‑app purchase
-          that unlocks favorites, advanced widgets, and deeper Shortcut automation —
-          for the people who use MQTT every day.
+          EasyMQTT is free to start. Plus unlocks the workflows heavy MQTT users care about:
+          more saved brokers, reusable commands and topics, advanced widgets, Shortcuts,
+          and background-friendly mobile monitoring for people who work with MQTT every day.
         </p>
         <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="nav-cta" style="background:var(--purple-700)">
           Get EasyMQTT Plus <span class="arrow-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
@@ -388,35 +388,35 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
           <div>
             <strong>Publish favorites</strong>
-            <span>One‑tap access to frequently‑sent payloads.</span>
+            <span>Save recurring payloads for fast repeat publishes.</span>
           </div>
         </div>
         <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
           <div>
             <strong>Subscribe favorites</strong>
-            <span>Star topics for instant access across devices.</span>
+            <span>Keep your go-to topics one tap away.</span>
           </div>
         </div>
         <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
           <div>
             <strong>Siri Shortcuts</strong>
-            <span>Publish and fetch from Shortcuts, widgets, and the Shortcuts app.</span>
+            <span>Publish and fetch MQTT data inside Siri and Shortcuts flows.</span>
           </div>
         </div>
         <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
           <div>
-            <strong>Graph widgets</strong>
-            <span>Sparkline widgets backed by your topic history.</span>
+            <strong>Multi-graph widgets</strong>
+            <span>Build richer dashboards with multiple MQTT graphs in one widget.</span>
           </div>
         </div>
         <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
           <div>
-            <strong>iCloud sync</strong>
-            <span>Brokers, favorites, and locations travel with you.</span>
+            <strong>Connection Keeper</strong>
+            <span>Keep active mobile workflows going in the background and preserve broker context on the go.</span>
           </div>
         </div>
       </div>
@@ -430,10 +430,10 @@
     <div class="section-head">
       <div class="section-kicker">Support</div>
       <h2 class="section-title">
-        Stuck? <span class="serif">Here's every answer.</span>
+        Need help? <span class="serif">Start here.</span>
       </h2>
       <p class="section-lede">
-        The common questions, step‑by‑step tutorials, and a quick line to the developer.
+        Troubleshooting guides, setup tutorials, and direct support for real MQTT workflows.
       </p>
       <div style="margin-top:24px">
         <div class="support-tabs" data-tabs>
@@ -447,74 +447,74 @@
         <div data-tab-panel="faq">
           <details class="faq-item" open>
             <summary><span>The app won't connect to my broker</span><span class="plus">+</span></summary>
-            <div class="body">First, try the public broker <code>broker.hivemq.com</code> to confirm the app can reach the internet. If that works, double‑check your host, port, and credentials — most connection failures come from a wrong port (1883 vs 8883 for TLS) or a stale client ID.</div>
+            <div class="body">First, try a known-good public broker like <code>broker.hivemq.com</code> to confirm the app can reach the network. If that works, check your host, port, credentials, TLS settings, and client ID. The most common problems are the wrong port, a TLS mismatch, or stale broker credentials.</div>
           </details>
           <details class="faq-item">
             <summary><span>How do I configure Siri Shortcuts?</span><span class="plus">+</span></summary>
-            <div class="body">Open the Shortcuts app, tap +, and search for <strong>EasyMQTT</strong>. You'll see actions for <strong>Send Message</strong> and <strong>Fetch Message</strong>. Pick a broker, type a topic, and either hardcode a payload or use a previous action's output.</div>
+            <div class="body">Open the Shortcuts app, create a new shortcut, and search for <strong>EasyMQTT</strong>. You'll find actions for <strong>Send Message</strong>, <strong>Send Favorite</strong>, and <strong>Fetch Message</strong>. Pick a saved broker, enter a topic, and either hardcode a payload or pass one in from another action.</div>
           </details>
           <details class="faq-item">
             <summary><span>I can't see any brokers when setting up a Shortcut or Widget</span><span class="plus">+</span></summary>
-            <div class="body">Make sure the broker is saved in the app — either via <strong>Add to favorites</strong> on the Connect screen, or under <strong>Settings → Brokers</strong>. Give it a name and save. The broker should now appear in the Shortcuts and Widgets pickers.</div>
+            <div class="body">Make sure the broker is saved in the app first. Add it from the Connect screen or under <strong>Settings → Brokers</strong>, give it a clear name, then save it. Saved brokers are what the app exposes to widgets and Shortcuts.</div>
           </details>
           <details class="faq-item">
             <summary><span>What do the Send Message and Fetch Message shortcuts do?</span><span class="plus">+</span></summary>
-            <div class="body"><strong>Send Message</strong> publishes a payload to a topic on a broker — with optional retain and QoS. <strong>Fetch Message</strong> subscribes to a topic and returns the most recent retained message, handy for reading state into other Shortcut actions.</div>
+            <div class="body"><strong>Send Message</strong> publishes a payload to a topic on a broker, with optional retain. <strong>Fetch Message</strong> subscribes to a topic and returns a message value so you can feed MQTT state into the rest of your Shortcut. It works best when the topic has a retained message available.</div>
           </details>
           <details class="faq-item">
             <summary><span>What types of widgets are there?</span><span class="plus">+</span></summary>
-            <div class="body">Three kinds: <strong>Single value</strong> (one topic, one number), <strong>Dual value</strong> (two topics side‑by‑side), and <strong>Graph widget</strong> (a sparkline from a topic's history). All refresh in the background every few minutes.</div>
+            <div class="body">EasyMQTT supports MQTT widgets for quick-glance values and graph widgets for values over time. Plus unlocks richer multi-graph widgets with live update support inside the app, so you can build a small dashboard around the topics you watch most.</div>
           </details>
           <details class="faq-item">
             <summary><span>Does EasyMQTT support TLS / SSL?</span><span class="plus">+</span></summary>
-            <div class="body">Yes — tick the TLS/SSL toggle on the Connect screen. EasyMQTT uses the system trust store; self‑signed certs aren't supported yet.</div>
+            <div class="body">Yes. EasyMQTT supports TLS/SSL, client certificates imported as PKCS#12 files, and MQTT over secure WebSockets. If your setup needs it, you can also allow untrusted certificates for brokers that are using self-signed or otherwise non-standard trust chains.</div>
           </details>
           <details class="faq-item">
             <summary><span>Is my data synced across devices?</span><span class="plus">+</span></summary>
-            <div class="body">Brokers, favorites, and locations sync via iCloud if you're signed in. Messages are kept locally — they never leave your device.</div>
+            <div class="body">Saved brokers, favorites, and remembered broker locations can sync through iCloud. Live messages stay on device, and connection history is stored locally on the device where it was recorded.</div>
           </details>
           <details class="faq-item">
             <summary><span>Does EasyMQTT run on Mac?</span><span class="plus">+</span></summary>
-            <div class="body">Yes — the Mac Catalyst build is on the Mac App Store. Same UI, keyboard shortcuts, and menu bar integration for quick publishes.</div>
+            <div class="body">Yes. EasyMQTT runs on Mac with the same core broker, publish, subscribe, widget, and Shortcuts workflows available on iPhone and iPad through the Mac Catalyst build.</div>
           </details>
         </div>
         <div data-tab-panel="articles" style="display:none">
           <a class="article-card" href="#">
             <div class="meta">Tutorial</div>
             <h4>Graphing Zigbee2MQTT sensors with widgets</h4>
-            <p>Turn your z2m temperature and humidity readings into live sparklines on the Home Screen in five minutes.</p>
+            <p>Turn Zigbee2MQTT temperature, humidity, or power readings into glanceable MQTT widgets in a few minutes.</p>
             <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
           </a>
           <a class="article-card" href="#">
             <div class="meta">Guide</div>
             <h4>Home Assistant + EasyMQTT: a quick start</h4>
-            <p>Point EasyMQTT at your HA broker, subscribe to statestream, and fire off Siri commands that toggle scenes.</p>
+            <p>Connect EasyMQTT to your Home Assistant broker, subscribe to key topics, and trigger MQTT actions from Siri and Shortcuts.</p>
             <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
           </a>
           <a class="article-card" href="#">
             <div class="meta">Tips</div>
             <h4>Five Siri Shortcuts we can't live without</h4>
-            <p>From good‑morning routines to NFC stickers on the fridge — the Shortcuts our users keep asking about.</p>
+            <p>From good‑morning routines to retained-state checks and NFC actions, these are the automations MQTT users set up again and again.</p>
             <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
           </a>
           <a class="article-card" href="#">
             <div class="meta">Reference</div>
             <h4>MQTT wildcards, explained with real topics</h4>
-            <p>When to use <code>+</code> versus <code>#</code>, and the gotchas that bite everyone their first week.</p>
+            <p>When to use <code>+</code> versus <code>#</code>, with real MQTT topic examples from home automation and device debugging.</p>
             <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
           </a>
         </div>
       </div>
       <div class="support-side">
         <h3>Still stuck?</h3>
-        <p>Reach out and I'll get back to you quickly. One person builds EasyMQTT, so replies come from me directly.</p>
+        <p>Reach out and you'll hear back from the developer. Good support matters when you're debugging brokers, payloads, widgets, or automation flows.</p>
         <a href="mailto:support@easymqtt.app" class="row">
           <div class="ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
           </div>
           <div>
             <strong>support@easymqtt.app</strong>
-            <small>Email support · usually within 24h</small>
+            <small>Email support for setup and troubleshooting</small>
           </div>
         </a>
         <a href="#" class="row">
@@ -523,7 +523,7 @@
           </div>
           <div>
             <strong>Community Discord</strong>
-            <small>Chat with other users</small>
+            <small>Compare setups, shortcuts, and widget ideas</small>
           </div>
         </a>
         <a href="#" class="row">
@@ -532,7 +532,7 @@
           </div>
           <div>
             <strong>Full documentation</strong>
-            <small>Every feature, explained</small>
+            <small>Setup guides, MQTT tips, and feature walkthroughs</small>
           </div>
         </a>
       </div>
@@ -545,9 +545,9 @@
   <svg class="hero-stars" data-stars="50" data-stars-alt xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:.3;mix-blend-mode:screen"></svg>
   <div class="wrap" style="position:relative">
     <h2>
-      Ready when <span class="serif">you are.</span>
+      Take MQTT with you, <span class="serif">wherever you work.</span>
     </h2>
-    <p>Free to download. Plus is a one‑time unlock. No ads, no tracking, no subscriptions.</p>
+    <p>Free to download. Upgrade to Plus for heavier workflows. No ads, privacy-first, and built for people who actually use MQTT.</p>
     <div class="ctas">
       <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="btn-app-store">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.8 3-.8s1.8.7 3 .7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.6zM14.3 5.8c.6-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.9-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg>
@@ -556,7 +556,7 @@
           <span class="big">App Store</span>
         </span>
       </a>
-      <a href="#support" class="btn-ghost">Questions? See support</a>
+      <a href="#support" class="btn-ghost">Questions? Start with support</a>
     </div>
   </div>
 </section>
@@ -570,7 +570,7 @@
           <img src="assets/icon-classic.png" alt=""/>
           <span>EasyMQTT</span>
         </div>
-        <p class="foot-tag">A friendly MQTT client for iPhone, iPad, and Mac. Built in Switzerland by a single developer.</p>
+        <p class="foot-tag">A mobile MQTT client for iPhone, iPad, and Mac. Built in Switzerland by a single developer.</p>
         <div class="socials">
           <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H22l-7.3 8.4L23 21h-6.9l-5.2-6.8L4.7 21H1.6l7.8-9L1 3h7l4.7 6.2L18.9 3zm-1.2 16.2h1.7L7.4 4.7H5.6l12.1 14.5z"/></svg></a>
           <a href="#" aria-label="Mastodon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.5c0-3.4-2.2-4.4-2.2-4.4-1.1-.5-3-.7-4.9-.7h0c-2 0-3.8.2-4.9.7 0 0-2.2 1-2.2 4.4v5.4c0 3.3 2 6.6 6.2 7.7 1.3.3 2.5.4 3.2.4-.1.8-.8 1.6-2.3 1.7-1.9.2-3.2-.8-3.4-1.4h-2c.2 1.9 2.1 3.7 5.3 3.7 3.5 0 6-2 6-5V7.5zm-3 7.6h-2v-5c0-1.3-.5-1.9-1.6-1.9s-1.7.7-1.7 2V13h-2V10.2c0-1.3-.6-2-1.7-2s-1.6.6-1.6 1.9v5h-2V10c0-1.3.4-2.4 1-3.2.8-.7 1.7-1.1 2.8-1.1 1.3 0 2.3.5 3 1.5l.5 1 .5-1c.7-1 1.7-1.5 3-1.5 1.2 0 2.1.4 2.8 1.1.7.8 1 1.9 1 3.2z"/></svg></a>
@@ -581,6 +581,7 @@
       <div>
         <h5>Product</h5>
         <a href="#features">Features</a>
+        <a href="#automation">Workflows</a>
         <a href="#plus">EasyMQTT Plus</a>
         <a href="https://apps.apple.com/app/easymqtt/id1523099606">Download</a>
       </div>

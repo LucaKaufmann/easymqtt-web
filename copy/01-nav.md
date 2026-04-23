@@ -1,0 +1,35 @@
+# 01 — Sticky navigation
+
+The thin bar pinned to the top of the page on every scroll. Only the link
+labels are real copy — everything else (logo image, theme toggle icon,
+mobile hamburger) is visual.
+
+---
+
+### Brand wordmark
+
+Sits next to the app icon, top-left.
+
+> EasyMQTT
+
+---
+
+### Primary nav links
+
+Four anchor links that jump to sections further down the page.
+
+> Features
+>
+> Workflows
+>
+> Plus
+>
+> Support
+
+---
+
+### Download button (nav CTA)
+
+Purple pill on the right of the nav. Links to the App Store.
+
+> Download
