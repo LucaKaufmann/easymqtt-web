@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>EasyMQTT — Beautiful MQTT client for iPhone, iPad & Mac</title>
+<meta name="description" content="EasyMQTT is a friendly, full-featured MQTT client for iOS and macOS. Connect to any broker, subscribe to live topics, publish favorites, and automate with Siri Shortcuts and widgets."/>
+<meta name="keywords" content="MQTT, MQTT client, iOS MQTT, Home Assistant, Zigbee2MQTT, Siri Shortcuts, MQTT iPhone, MQTT iPad, MQTT Mac, home automation"/>
+<meta name="theme-color" content="#6E3EF5"/>
+
+<meta property="og:title" content="EasyMQTT — MQTT that feels like home"/>
+<meta property="og:description" content="Connect to any MQTT broker, watch topics live, and automate your home with Siri Shortcuts and widgets."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="assets/icon-classic.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<link rel="icon" type="image/png" href="assets/icon-classic.png"/>
+<link rel="apple-touch-icon" href="assets/icon-classic.png"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet" href="styles.css"/>
+
+<script>
+  (function(){
+    try {
+      var saved = localStorage.getItem('emqtt-theme');
+      var theme = (saved === 'light' || saved === 'dark')
+        ? saved
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"MobileApplication",
+  "name":"EasyMQTT",
+  "operatingSystem":"iOS, iPadOS, macOS",
+  "applicationCategory":"UtilitiesApplication",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"500"}
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <img src="assets/icon-classic.png" alt="EasyMQTT"/>
+      <span>EasyMQTT</span>
+    </a>
+    <div class="nav-links" data-nav-links>
+      <a href="#features">Features</a>
+      <a href="#automation">Automation</a>
+      <a href="#plus">Plus</a>
+      <a href="#support">Support</a>
+      <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="nav-cta">
+        <span class="dot"></span>
+        Download
+      </a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" data-theme-toggle aria-label="Switch theme" title="Switch theme">
+        <svg data-icon-sun viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg data-icon-moon viewBox="0 0 24 24" fill="currentColor"><path d="M20.742 13.045a8.088 8.088 0 01-2.077.271c-2.135 0-4.14-.83-5.646-2.336A8.026 8.026 0 0110.73 5.93a7.993 7.993 0 01.21-1.902A.5.5 0 0010.25 3.5a9 9 0 109.994 10.039.5.5 0 00-.502-.494z"/></svg>
+      </button>
+      <button class="mobile-toggle" data-mobile-toggle aria-label="menu">
+        <svg data-icon-menu viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg data-icon-close viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><path d="M6 6l12 12M6 18L18 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top" style="padding:64px 0 100px">
+  <svg class="hero-stars" data-stars="40" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">
+        <span class="pill">NEW · 1.24.0</span>
+        Broker locations &amp; automation fixes
+      </div>
+      <h1>
+        Put MQTT in<br/>
+        <span class="serif">your pocket.</span>
+      </h1>
+      <p class="hero-sub">
+        A beautiful, friendly MQTT client for iPhone, iPad, and Mac.
+        Connect to any broker, watch topics live, and automate your home
+        with Siri Shortcuts and widgets.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="btn-app-store">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.8 3-.8s1.8.7 3 .7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.6zM14.3 5.8c.6-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.9-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+          <span>
+            <span class="small">Download on the</span>
+            <span class="big">App Store</span>
+          </span>
+        </a>
+        <a href="#features" class="btn-ghost btn-ghost-sm">Explore features <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></a>
+      </div>
+      <div class="hero-meta">
+        <span><span class="glowdot"></span> iOS 16+ · iPadOS · macOS</span>
+        <span>★ 4.8 · 10,000+ users</span>
+        <span>v1.24.0</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone-float">
+        <img data-hero-screenshot src="assets/raw-iphone-subscribe.png" alt="EasyMQTT subscribe screen" style="border-radius:40px; border:6px solid #14111C; box-shadow:0 0 0 2px rgba(255,255,255,.2)"/>
+      </div>
+      <div class="ticker-card hero-float-1" data-ticker="1">
+        <div class="t-label"><span class="live"></span> Live · <span data-ticker-label></span></div>
+        <div class="t-row">
+          <span class="t-topic" data-ticker-topic></span>
+          <span class="t-val" data-ticker-val></span>
+        </div>
+      </div>
+      <div class="ticker-card hero-float-2" data-ticker="2">
+        <div class="t-label"><span class="live"></span> Subscribed</div>
+        <div class="t-row">
+          <span class="t-topic" data-ticker-topic></span>
+          <span class="t-val" data-ticker-val></span>
+        </div>
+      </div>
+      <div class="ticker-card hero-float-3" data-ticker="3">
+        <div class="t-label">⚡ Shortcut · Send</div>
+        <div class="t-row">
+          <span class="t-topic" data-ticker-topic></span>
+          <span class="t-val" data-ticker-val></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats wrap" style="max-width:1240px">
+  <div class="stat">
+    <div class="num">10k+</div>
+    <div class="lbl">Active users</div>
+  </div>
+  <div class="stat">
+    <div class="num">4.8★</div>
+    <div class="lbl">App Store rating</div>
+  </div>
+  <div class="stat">
+    <div class="num">3</div>
+    <div class="lbl">Languages</div>
+  </div>
+  <div class="stat">
+    <div class="num">3</div>
+    <div class="lbl">Platforms supported</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" class="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker">Features</div>
+      <h2 class="section-title">
+        Everything you need from an MQTT client, <span class="serif">nothing you don't.</span>
+      </h2>
+      <p class="section-lede">
+        EasyMQTT ships the essentials of a great MQTT client — connect, subscribe, publish —
+        plus the iOS‑native touches that make it a joy to use every day.
+      </p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat" style="grid-column:span 6">
+        <div class="tag"><span class="dot"></span>Connect</div>
+        <h3>Connect to any MQTT broker</h3>
+        <p>Plug in a URL, username, and password — or scan a recent broker on your network. Save multiple brokers, switch in a tap, and pick MQTT 3.1.1 or 5.0.</p>
+        <div class="feat-visual">
+          <div class="feat-phone">
+            <img data-feat-shot="assets/raw-iphone-connect.png" src="assets/raw-iphone-connect.png" alt="Connect to any MQTT broker"/>
+          </div>
+        </div>
+      </div>
+      <div class="feat" style="grid-column:span 6">
+        <div class="tag"><span class="dot"></span>Subscribe</div>
+        <h3>See every message, the moment it arrives</h3>
+        <p>Subscribe to wildcards, star your favorites, and watch messages stream in with full payload history and JSON pretty‑printing.</p>
+        <div class="feat-visual">
+          <div class="feat-phone">
+            <img data-feat-shot="assets/raw-iphone-subscribe.png" src="assets/raw-iphone-subscribe.png" alt="See every message, the moment it arrives"/>
+          </div>
+        </div>
+      </div>
+      <div class="feat third" style="grid-column:span 4">
+        <div class="tag"><span class="dot"></span>Publish</div>
+        <h3>Publish in a tap</h3>
+        <p>Save recurring payloads as favorites. Set QoS, retain, and fire it off — perfect for toggling lights, scenes, or Zigbee2MQTT commands.</p>
+        <div class="feat-visual">
+          <div class="feat-phone">
+            <img data-feat-shot="assets/raw-iphone-publish.png" src="assets/raw-iphone-publish.png" alt="Publish in a tap"/>
+          </div>
+        </div>
+      </div>
+      <div class="feat third" style="grid-column:span 4">
+        <div class="tag"><span class="dot"></span>Widgets</div>
+        <h3>Live data on your Home Screen</h3>
+        <p>Graph widgets turn your MQTT topics into sparklines you can glance at. Temperature, humidity, energy — without opening the app.</p>
+        <div class="feat-visual">
+          <div class="feat-phone">
+            <img data-feat-shot="assets/raw-iphone-widgets.png" src="assets/raw-iphone-widgets.png" alt="Live data on your Home Screen"/>
+          </div>
+        </div>
+      </div>
+      <div class="feat third" style="grid-column:span 4">
+        <div class="tag"><span class="dot"></span>Locations</div>
+        <h3>Brokers know where they live</h3>
+        <p>Tag brokers by location so EasyMQTT can suggest the right one when you're home, at work, or on the road. New in 1.14.</p>
+        <div class="feat-visual">
+          <div class="feat-phone">
+            <img data-feat-shot="assets/raw-iphone-locations.png" src="assets/raw-iphone-locations.png" alt="Brokers know where they live"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION SPOTLIGHT -->
+<section id="automation">
+  <div class="spotlight">
+    <div class="wrap" style="padding:0; max-width:1160px">
+      <div style="max-width:680px">
+        <div class="section-kicker">Automation</div>
+        <h2>
+          Siri. Shortcuts. Widgets. <span class="serif">All MQTT‑native.</span>
+        </h2>
+        <p class="section-lede">
+          Publish a message with "Hey Siri." Build an automation that dims the lights at sunset.
+          Pin a live sensor to your Home Screen. EasyMQTT plugs MQTT into the iOS
+          automation fabric — and stays out of the way.
+        </p>
+      </div>
+      <div class="spot-grid">
+        <div class="terminal" data-terminal>
+          <div class="t-head"><span></span><span></span><span></span></div>
+          <div data-terminal-lines></div>
+          <div style="margin-top:14px; font-size:11px; color:rgba(255,255,255,.4)" data-terminal-footer>
+            Subscribed · 4 topics · last payload 1s ago
+          </div>
+        </div>
+        <div>
+          <div class="shortcut-card">
+            <div class="ico siri"><span style="font-size:22px">✨</span></div>
+            <div>
+              <strong>"Hey Siri, I'm home"</strong>
+              <div class="sub">Publishes <span class="mono" style="color:var(--purple-700)">home/mode</span> = <span class="mono">arrived</span></div>
+            </div>
+          </div>
+          <div class="shortcut-card">
+            <div class="ico widget"><span style="font-size:20px">▣</span></div>
+            <div>
+              <strong>Graph widget · Living room</strong>
+              <div class="sub">Sparkline from <span class="mono" style="color:var(--purple-700)">sensors/livingroom/temp</span></div>
+            </div>
+          </div>
+          <div class="shortcut-card">
+            <div class="ico graph"><span style="font-size:20px">📈</span></div>
+            <div>
+              <strong>Fetch from Shortcuts</strong>
+              <div class="sub">Read a retained payload into any Shortcut flow</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases" class="usecases">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker">Who uses it</div>
+      <h2 class="section-title">
+        Home automators, makers, <span class="serif">and industrial pros.</span>
+      </h2>
+    </div>
+    <div class="case-grid">
+      <div class="case">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1z"/></svg>
+        </div>
+        <h3>Home automation</h3>
+        <p>Pipe Home Assistant, Zigbee2MQTT, or esphome straight into your phone. One app for every broker in the house.</p>
+        <ul>
+          <li><span>Home Assistant</span><span>MQTT statestream</span></li>
+          <li><span>Zigbee2MQTT</span><span>zigbee2mqtt/#</span></li>
+          <li><span>ESPHome</span><span>esphome/#</span></li>
+        </ul>
+      </div>
+      <div class="case">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M3 21V10l6 4V10l6 4V6l6 4v11z"/><path d="M8 17h.01M12 17h.01M16 17h.01"/></svg>
+        </div>
+        <h3>Remote monitoring</h3>
+        <p>Keep an eye on production lines, sensors, and gateways from the couch. Graph widgets for the numbers that matter.</p>
+        <ul>
+          <li><span>Latency</span><span>&lt; 200 ms</span></li>
+          <li><span>QoS</span><span>0 / 1 / 2</span></li>
+          <li><span>Keep-alive</span><span>60 s</span></li>
+        </ul>
+      </div>
+      <div class="case">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><rect x="7" y="8" width="10" height="12" rx="5"/><path d="M10 8V5a2 2 0 014 0v3M5 12h2m10 0h2M4 8l2 2m12-2l-2 2M4 18l2-1m12 1l-2-1"/></svg>
+        </div>
+        <h3>MQTT debugging</h3>
+        <p>The quickest way to sniff a topic, test a payload, or double‑check a retained message before you commit.</p>
+        <ul>
+          <li><span>Wildcards</span><span># + +</span></li>
+          <li><span>Retain</span><span>supported</span></li>
+          <li><span>TLS</span><span>optional</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="platforms" style="padding:56px 0">
+  <div class="wrap">
+    <div class="row">
+      <div class="p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 19h2"/></svg>
+        <h4>iPhone</h4><p>iOS 16+</p>
+      </div>
+      <div class="p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M11 18h2"/></svg>
+        <h4>iPad</h4><p>iPadOS 16+ · Split View</p>
+      </div>
+      <div class="p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="13" rx="1.5"/><path d="M8 21h8m-5-4v4m-2 0h6"/></svg>
+        <h4>Mac</h4><p>Catalyst · Apple Silicon</p>
+      </div>
+      <div class="p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="2.5"/><path d="M9 6l1-3h4l1 3M9 18l1 3h4l1-3"/></svg>
+        <h4>Shortcuts</h4><p>Runs on Watch via Shortcuts</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLUS -->
+<section id="plus" class="plus">
+  <div class="wrap">
+    <div class="plus-card">
+      <div>
+        <div class="section-kicker" style="color:var(--purple-700)">EasyMQTT Plus</div>
+        <h2>Unlock the <span class="serif">power user</span> features.</h2>
+        <p class="sub">
+          EasyMQTT is free and fully usable. Plus is a one‑time in‑app purchase
+          that unlocks favorites, advanced widgets, and deeper Shortcut automation —
+          for the people who use MQTT every day.
+        </p>
+        <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="nav-cta" style="background:var(--purple-700)">
+          Get EasyMQTT Plus <span class="arrow-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
+        </a>
+      </div>
+      <div class="plus-list">
+        <div class="item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <div>
+            <strong>Multiple brokers</strong>
+            <span>Save as many brokers as you like and switch in a tap.</span>
+          </div>
+        </div>
+        <div class="item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <div>
+            <strong>Publish favorites</strong>
+            <span>One‑tap access to frequently‑sent payloads.</span>
+          </div>
+        </div>
+        <div class="item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <div>
+            <strong>Subscribe favorites</strong>
+            <span>Star topics for instant access across devices.</span>
+          </div>
+        </div>
+        <div class="item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <div>
+            <strong>Siri Shortcuts</strong>
+            <span>Publish and fetch from Shortcuts, widgets, and the Shortcuts app.</span>
+          </div>
+        </div>
+        <div class="item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <div>
+            <strong>Graph widgets</strong>
+            <span>Sparkline widgets backed by your topic history.</span>
+          </div>
+        </div>
+        <div class="item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          <div>
+            <strong>iCloud sync</strong>
+            <span>Brokers, favorites, and locations travel with you.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support" class="support">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-kicker">Support</div>
+      <h2 class="section-title">
+        Stuck? <span class="serif">Here's every answer.</span>
+      </h2>
+      <p class="section-lede">
+        The common questions, step‑by‑step tutorials, and a quick line to the developer.
+      </p>
+      <div style="margin-top:24px">
+        <div class="support-tabs" data-tabs>
+          <button class="active" data-tab="faq">FAQ</button>
+          <button data-tab="articles">Articles &amp; Tutorials</button>
+        </div>
+      </div>
+    </div>
+    <div class="support-grid">
+      <div>
+        <div data-tab-panel="faq">
+          <details class="faq-item" open>
+            <summary><span>The app won't connect to my broker</span><span class="plus">+</span></summary>
+            <div class="body">First, try the public broker <code>broker.hivemq.com</code> to confirm the app can reach the internet. If that works, double‑check your host, port, and credentials — most connection failures come from a wrong port (1883 vs 8883 for TLS) or a stale client ID.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>How do I configure Siri Shortcuts?</span><span class="plus">+</span></summary>
+            <div class="body">Open the Shortcuts app, tap +, and search for <strong>EasyMQTT</strong>. You'll see actions for <strong>Send Message</strong> and <strong>Fetch Message</strong>. Pick a broker, type a topic, and either hardcode a payload or use a previous action's output.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>I can't see any brokers when setting up a Shortcut or Widget</span><span class="plus">+</span></summary>
+            <div class="body">Make sure the broker is saved in the app — either via <strong>Add to favorites</strong> on the Connect screen, or under <strong>Settings → Brokers</strong>. Give it a name and save. The broker should now appear in the Shortcuts and Widgets pickers.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>What do the Send Message and Fetch Message shortcuts do?</span><span class="plus">+</span></summary>
+            <div class="body"><strong>Send Message</strong> publishes a payload to a topic on a broker — with optional retain and QoS. <strong>Fetch Message</strong> subscribes to a topic and returns the most recent retained message, handy for reading state into other Shortcut actions.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>What types of widgets are there?</span><span class="plus">+</span></summary>
+            <div class="body">Three kinds: <strong>Single value</strong> (one topic, one number), <strong>Dual value</strong> (two topics side‑by‑side), and <strong>Graph widget</strong> (a sparkline from a topic's history). All refresh in the background every few minutes.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Does EasyMQTT support TLS / SSL?</span><span class="plus">+</span></summary>
+            <div class="body">Yes — tick the TLS/SSL toggle on the Connect screen. EasyMQTT uses the system trust store; self‑signed certs aren't supported yet.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Is my data synced across devices?</span><span class="plus">+</span></summary>
+            <div class="body">Brokers, favorites, and locations sync via iCloud if you're signed in. Messages are kept locally — they never leave your device.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Does EasyMQTT run on Mac?</span><span class="plus">+</span></summary>
+            <div class="body">Yes — the Mac Catalyst build is on the Mac App Store. Same UI, keyboard shortcuts, and menu bar integration for quick publishes.</div>
+          </details>
+        </div>
+        <div data-tab-panel="articles" style="display:none">
+          <a class="article-card" href="#">
+            <div class="meta">Tutorial</div>
+            <h4>Graphing Zigbee2MQTT sensors with widgets</h4>
+            <p>Turn your z2m temperature and humidity readings into live sparklines on the Home Screen in five minutes.</p>
+            <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
+          </a>
+          <a class="article-card" href="#">
+            <div class="meta">Guide</div>
+            <h4>Home Assistant + EasyMQTT: a quick start</h4>
+            <p>Point EasyMQTT at your HA broker, subscribe to statestream, and fire off Siri commands that toggle scenes.</p>
+            <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
+          </a>
+          <a class="article-card" href="#">
+            <div class="meta">Tips</div>
+            <h4>Five Siri Shortcuts we can't live without</h4>
+            <p>From good‑morning routines to NFC stickers on the fridge — the Shortcuts our users keep asking about.</p>
+            <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
+          </a>
+          <a class="article-card" href="#">
+            <div class="meta">Reference</div>
+            <h4>MQTT wildcards, explained with real topics</h4>
+            <p>When to use <code>+</code> versus <code>#</code>, and the gotchas that bite everyone their first week.</p>
+            <span class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg></span>
+          </a>
+        </div>
+      </div>
+      <div class="support-side">
+        <h3>Still stuck?</h3>
+        <p>Reach out and I'll get back to you quickly. One person builds EasyMQTT, so replies come from me directly.</p>
+        <a href="mailto:support@easymqtt.app" class="row">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </div>
+          <div>
+            <strong>support@easymqtt.app</strong>
+            <small>Email support · usually within 24h</small>
+          </div>
+        </a>
+        <a href="#" class="row">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 12a8 8 0 1116 0 8 8 0 01-11 7.4L4 21l1.6-5A8 8 0 014 12z"/></svg>
+          </div>
+          <div>
+            <strong>Community Discord</strong>
+            <small>Chat with other users</small>
+          </div>
+        </a>
+        <a href="#" class="row">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 4h9a4 4 0 014 4v12H8a4 4 0 01-4-4z"/><path d="M4 4v12a4 4 0 014 4"/></svg>
+          </div>
+          <div>
+            <strong>Full documentation</strong>
+            <small>Every feature, explained</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <svg class="hero-stars" data-stars="50" data-stars-alt xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:.3;mix-blend-mode:screen"></svg>
+  <div class="wrap" style="position:relative">
+    <h2>
+      Ready when <span class="serif">you are.</span>
+    </h2>
+    <p>Free to download. Plus is a one‑time unlock. No ads, no tracking, no subscriptions.</p>
+    <div class="ctas">
+      <a href="https://apps.apple.com/app/easymqtt/id1523099606" class="btn-app-store">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.8 3-.8s1.8.7 3 .7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.6zM14.3 5.8c.6-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.9-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+        <span>
+          <span class="small">Download on the</span>
+          <span class="big">App Store</span>
+        </span>
+      </a>
+      <a href="#support" class="btn-ghost">Questions? See support</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="assets/icon-classic.png" alt=""/>
+          <span>EasyMQTT</span>
+        </div>
+        <p class="foot-tag">A friendly MQTT client for iPhone, iPad, and Mac. Built in Switzerland by a single developer.</p>
+        <div class="socials">
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H22l-7.3 8.4L23 21h-6.9l-5.2-6.8L4.7 21H1.6l7.8-9L1 3h7l4.7 6.2L18.9 3zm-1.2 16.2h1.7L7.4 4.7H5.6l12.1 14.5z"/></svg></a>
+          <a href="#" aria-label="Mastodon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.5c0-3.4-2.2-4.4-2.2-4.4-1.1-.5-3-.7-4.9-.7h0c-2 0-3.8.2-4.9.7 0 0-2.2 1-2.2 4.4v5.4c0 3.3 2 6.6 6.2 7.7 1.3.3 2.5.4 3.2.4-.1.8-.8 1.6-2.3 1.7-1.9.2-3.2-.8-3.4-1.4h-2c.2 1.9 2.1 3.7 5.3 3.7 3.5 0 6-2 6-5V7.5zm-3 7.6h-2v-5c0-1.3-.5-1.9-1.6-1.9s-1.7.7-1.7 2V13h-2V10.2c0-1.3-.6-2-1.7-2s-1.6.6-1.6 1.9v5h-2V10c0-1.3.4-2.4 1-3.2.8-.7 1.7-1.1 2.8-1.1 1.3 0 2.3.5 3 1.5l.5 1 .5-1c.7-1 1.7-1.5 3-1.5 1.2 0 2.1.4 2.8 1.1.7.8 1 1.9 1 3.2z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.6.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1.1 1.5 1.1.9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 015 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.1 10.1 0 0022 12.2C22 6.6 17.5 2 12 2z"/></svg></a>
+          <a href="mailto:hello@easymqtt.app" aria-label="Mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="#features">Features</a>
+        <a href="#plus">EasyMQTT Plus</a>
+        <a href="https://apps.apple.com/app/easymqtt/id1523099606">Download</a>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <a href="#support">FAQ</a>
+        <a href="#support">Tutorials</a>
+        <a href="mailto:support@easymqtt.app">Contact</a>
+        <a href="#">Documentation</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">EULA</a>
+        <a href="#">Press kit</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 EasyMQTT · Made with care by Luca</span>
+      <span>v1.24.0 · iOS 16+ · iPadOS · macOS Catalyst</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  var TICKER_MESSAGES = [
+    {topic: "zigbee2mqtt/kitchen/light", value: "ON", label: "state"},
+    {topic: "sensors/livingroom/temp", value: "22.4°C", label: "reading"},
+    {topic: "energy/solar/power", value: "1.24 kW", label: "realtime"},
+    {topic: "factory/line-1/humidity", value: "44.5 %", label: "humidity"},
+    {topic: "zigbee2mqtt/office/motion", value: "occupied", label: "presence"},
+    {topic: "weather/outside/temp", value: "14.8°C", label: "reading"},
+    {topic: "home/garage/door", value: "closed", label: "state"},
+    {topic: "solar/battery/level", value: "82 %", label: "battery"}
+  ];
+
+  // Star fields
+  function renderStars(svg){
+    var count = parseInt(svg.getAttribute('data-stars'), 10) || 40;
+    var alt = svg.hasAttribute('data-stars-alt');
+    var parts = [];
+    for (var i = 0; i < count; i++){
+      var cx = alt ? (i * 79) % 100 : (i * 73) % 100;
+      var cy = alt ? (i * 37) % 100 : (i * 131) % 100;
+      var r = (i % 5 === 0) ? 2 : 1;
+      var opacity = ((i % 3) * 0.25) + 0.2;
+      parts.push('<circle cx="' + cx + '%" cy="' + cy + '%" r="' + r + '" fill="white" opacity="' + opacity + '"/>');
+    }
+    svg.innerHTML = parts.join('');
+  }
+  document.querySelectorAll('[data-stars]').forEach(renderStars);
+
+  // THEME
+  var themeBtn = document.querySelector('[data-theme-toggle]');
+  var sunIcon = themeBtn.querySelector('[data-icon-sun]');
+  var moonIcon = themeBtn.querySelector('[data-icon-moon]');
+
+  function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('emqtt-theme', theme); } catch (e) {}
+    sunIcon.style.display = theme === 'dark' ? '' : 'none';
+    moonIcon.style.display = theme === 'dark' ? 'none' : '';
+    var next = theme === 'dark' ? 'light' : 'dark';
+    themeBtn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    themeBtn.setAttribute('title', 'Switch to ' + next + ' mode');
+    updateScreenshots(theme);
+  }
+
+  function updateScreenshots(theme){
+    var hero = document.querySelector('[data-hero-screenshot]');
+    if (hero){
+      hero.src = theme === 'dark' ? 'assets/raw-iphone-subscribe-dark.png' : 'assets/raw-iphone-subscribe.png';
+    }
+    document.querySelectorAll('[data-feat-shot]').forEach(function(img){
+      var base = img.getAttribute('data-feat-shot');
+      img.src = theme === 'dark' ? base.replace(/\.png$/, '-dark.png') : base;
+    });
+  }
+
+  themeBtn.addEventListener('click', function(){
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+  applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
+  // MOBILE MENU
+  var mobileBtn = document.querySelector('[data-mobile-toggle]');
+  var navLinks = document.querySelector('[data-nav-links]');
+  var menuIcon = mobileBtn.querySelector('[data-icon-menu]');
+  var closeIcon = mobileBtn.querySelector('[data-icon-close]');
+  function setMenuOpen(open){
+    navLinks.classList.toggle('open', open);
+    menuIcon.style.display = open ? 'none' : '';
+    closeIcon.style.display = open ? '' : 'none';
+  }
+  mobileBtn.addEventListener('click', function(){
+    setMenuOpen(!navLinks.classList.contains('open'));
+  });
+  navLinks.addEventListener('click', function(){ setMenuOpen(false); });
+
+  // HERO TICKERS — match app.jsx useIndependentTicker behavior
+  function mountTicker(cardIndex, intervalMs, initialOffset, extraOffset){
+    var card = document.querySelector('[data-ticker="' + cardIndex + '"]');
+    if (!card) return;
+    var topicEl = card.querySelector('[data-ticker-topic]');
+    var valEl = card.querySelector('[data-ticker-val]');
+    var labelEl = card.querySelector('[data-ticker-label]');
+    var idx = initialOffset;
+
+    function render(){
+      var m = TICKER_MESSAGES[(idx + extraOffset) % TICKER_MESSAGES.length];
+      topicEl.textContent = m.topic;
+      valEl.textContent = m.value;
+      if (labelEl) labelEl.textContent = m.label;
+    }
+    render();
+
+    var jitter = Math.random() * intervalMs * 0.7;
+    function tick(){
+      idx += 1;
+      render();
+      var next = intervalMs + (Math.random() * 4000 - 2000);
+      setTimeout(tick, next);
+    }
+    setTimeout(tick, jitter + 800);
+  }
+  mountTicker(1, 11000, 0, 0);
+  mountTicker(2, 14500, 2, 3);
+  mountTicker(3, 17000, 4, 5);
+
+  // SPOTLIGHT TERMINAL
+  var terminalLines = document.querySelector('[data-terminal-lines]');
+  var terminalFooter = document.querySelector('[data-terminal-footer]');
+  var META = ["qos 0", "retain", "qos 1", "qos 0", "retain"];
+  var lines = TICKER_MESSAGES.slice(0, 5);
+
+  function renderTerminal(){
+    var html = '';
+    for (var i = 0; i < lines.length; i++){
+      var l = lines[i];
+      var cls = 't-line' + (i === 0 ? ' incoming' : '');
+      html += '<div class="' + cls + '">'
+        + '<span><span class="topic">' + l.topic + '</span> <span class="val">' + l.value + '</span></span>'
+        + '<span class="meta">' + META[i % 5] + '</span>'
+        + '</div>';
+    }
+    terminalLines.innerHTML = html;
+    terminalFooter.textContent = 'Subscribed · 4 topics · last payload ' + (Math.floor(Math.random() * 3) + 1) + 's ago';
+  }
+  renderTerminal();
+  setInterval(function(){
+    var next = TICKER_MESSAGES[Math.floor(Math.random() * TICKER_MESSAGES.length)];
+    lines = [next].concat(lines.slice(0, 4));
+    renderTerminal();
+  }, 1800);
+
+  // SUPPORT TABS
+  var tabs = document.querySelector('[data-tabs]');
+  if (tabs){
+    tabs.addEventListener('click', function(e){
+      var btn = e.target.closest('button[data-tab]');
+      if (!btn) return;
+      var name = btn.getAttribute('data-tab');
+      tabs.querySelectorAll('button').forEach(function(b){
+        b.classList.toggle('active', b === btn);
+      });
+      document.querySelectorAll('[data-tab-panel]').forEach(function(panel){
+        panel.style.display = panel.getAttribute('data-tab-panel') === name ? '' : 'none';
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
