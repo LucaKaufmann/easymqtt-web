@@ -604,9 +604,25 @@
   </div>
 </footer>
 
+<!-- ARTICLE MODAL -->
+<div id="article-modal" class="article-modal" hidden>
+  <div class="article-modal-backdrop" data-modal-close></div>
+  <div class="article-modal-card">
+    <button class="article-modal-close" data-modal-close aria-label="Close article">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+    <div class="article-modal-body" id="article-modal-body"></div>
+  </div>
+</div>
+
 <script>
 (function(){
   'use strict';
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function escapeAttr(s){ return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
   var TICKER_MESSAGES = [
     {topic: "zigbee2mqtt/kitchen/light", value: "ON", label: "state"},
@@ -806,13 +822,6 @@
     var CACHE_KEY = 'emqtt-faq-v1';
     var CACHE_TTL = 10 * 60 * 1000;
 
-    function escapeHtml(s){
-      return String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-    }
-
     function md(text){
       var out = escapeHtml(text);
       out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, t, u){
@@ -882,6 +891,83 @@
       });
     });
   }
+
+  // REMOTE ARTICLES + MODAL
+  var ARTICLES_BASE = 'https://lucakaufmann.github.io/easymqtt/';
+  var ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5l5 5-5 5"/></svg>';
+
+  var articleModal = document.getElementById('article-modal');
+  var articleModalBody = document.getElementById('article-modal-body');
+
+  function stripFrontmatter(text){
+    return text.replace(/^---[\r\n]+([\s\S]*?)[\r\n]+---[\r\n]+/, '');
+  }
+
+  function closeArticle(){
+    articleModal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+  }
+
+  function openArticle(fileUrl){
+    articleModalBody.innerHTML = '<p style="color:var(--muted);text-align:center;padding:48px 0">Loading\u2026</p>';
+    articleModal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+
+    function renderMarkdown(text){
+      var body = stripFrontmatter(text);
+      articleModalBody.innerHTML = window.marked
+        ? window.marked.parse(body)
+        : '<pre style="white-space:pre-wrap;font-size:14px">' + escapeHtml(body) + '</pre>';
+      articleModal.querySelector('.article-modal-card').scrollTop = 0;
+    }
+
+    function doFetch(){
+      fetch(fileUrl, { cache: 'no-cache' })
+        .then(function(r){ return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(renderMarkdown)
+        .catch(function(){ articleModalBody.innerHTML = '<p style="color:var(--muted)">Could not load article.</p>'; });
+    }
+
+    if (window.marked){
+      doFetch();
+    } else {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/marked@12/marked.min.js';
+      s.onload = doFetch;
+      s.onerror = doFetch;
+      document.head.appendChild(s);
+    }
+  }
+
+  articleModal.addEventListener('click', function(e){
+    if (e.target.closest('[data-modal-close]')) closeArticle();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !articleModal.hasAttribute('hidden')) closeArticle();
+  });
+
+  fetch(ARTICLES_BASE + 'articles.json', { cache: 'no-cache' })
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(articles){
+      var panel = document.querySelector('[data-tab-panel="articles"]');
+      if (!panel || !articles.length) return;
+      panel.innerHTML = articles.map(function(a){
+        return '<a class="article-card" href="#" data-article="' + escapeAttr(ARTICLES_BASE + a.file) + '">'
+          + '<div class="meta">' + escapeHtml(a.category) + '</div>'
+          + '<h4>' + escapeHtml(a.title) + '</h4>'
+          + '<p>' + escapeHtml(a.summary) + '</p>'
+          + '<span class="read">Read article ' + ARROW_SVG + '</span>'
+          + '</a>';
+      }).join('');
+      panel.querySelectorAll('[data-article]').forEach(function(card){
+        card.addEventListener('click', function(e){
+          e.preventDefault();
+          openArticle(card.getAttribute('data-article'));
+        });
+      });
+    })
+    .catch(function(err){ console.warn('Remote articles unavailable:', err); });
+
 })();
 </script>
 
