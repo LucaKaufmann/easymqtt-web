@@ -45,6 +45,8 @@ Column heading then links.
 >
 > Workflows
 >
+> EasyMQTT CLI
+>
 > EasyMQTT Plus
 >
 > Download

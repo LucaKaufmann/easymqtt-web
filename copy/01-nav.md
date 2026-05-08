@@ -16,11 +16,14 @@ Sits next to the app icon, top-left.
 
 ### Primary nav links
 
-Four anchor links that jump to sections further down the page.
+Five primary links. Four jump to sections further down the home page, and
+CLI links to the standalone command-line companion page.
 
 > Features
 >
 > Workflows
+>
+> CLI
 >
 > Plus
 >
