@@ -463,6 +463,60 @@ easymqtt history \
     });
     navLinks.addEventListener('click', function(){ setMenuOpen(false); });
   }
+
+  function fallbackCopy(text){
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.top = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      return Promise.resolve();
+    } catch (e) {
+      return Promise.reject(e);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+
+  document.querySelectorAll('pre.code-block').forEach(function(pre, index){
+    var wrapper = document.createElement('div');
+    wrapper.className = 'code-copy-wrap';
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-code';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy code block ' + (index + 1));
+    wrapper.appendChild(button);
+
+    button.addEventListener('click', function(){
+      var code = pre.querySelector('code');
+      var text = code ? code.textContent : pre.textContent;
+      var copy = navigator.clipboard && window.isSecureContext
+        ? navigator.clipboard.writeText(text)
+        : fallbackCopy(text);
+
+      copy.then(function(){
+        button.textContent = 'Copied';
+        button.classList.add('copied');
+        window.setTimeout(function(){
+          button.textContent = 'Copy';
+          button.classList.remove('copied');
+        }, 1800);
+      }).catch(function(){
+        button.textContent = 'Failed';
+        window.setTimeout(function(){
+          button.textContent = 'Copy';
+        }, 1800);
+      });
+    });
+  });
 })();
 </script>
 

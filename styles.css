@@ -659,6 +659,14 @@ footer a:hover{color:#fff}
   gap:56px;
   align-items:center;
 }
+.cli-hero-grid > *,
+.cli-two-col > *,
+.cli-feature-grid > *,
+.command-grid > *,
+.cli-three-col > *,
+.mcp-setup > *{
+  min-width:0;
+}
 .cli-hero h1{
   font-size:clamp(48px, 7vw, 88px);
   margin:22px 0 18px;
@@ -679,6 +687,7 @@ footer a:hover{color:#fff}
   margin:0;
   white-space:pre-wrap;
   overflow-x:auto;
+  overflow-wrap:anywhere;
 }
 .cli-hero-panel code,
 .terminal code{
@@ -733,6 +742,8 @@ footer a:hover{color:#fff}
 .doc-card,
 .install-card,
 .notice{
+  min-width:0;
+  max-width:100%;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:20px;
@@ -752,6 +763,7 @@ footer a:hover{color:#fff}
   font-size:14.5px;
   margin:0 0 16px;
   line-height:1.65;
+  overflow-wrap:anywhere;
 }
 .doc-card p:last-child,
 .install-card p:last-child,
@@ -764,22 +776,71 @@ footer a:hover{color:#fff}
 .code-block{
   display:block;
   width:100%;
+  min-width:0;
+  max-width:100%;
   margin:14px 0 0;
   padding:18px 20px;
   overflow-x:auto;
-  white-space:pre;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  word-break:break-word;
   background:#100824;
   border:1px solid rgba(255,255,255,.08);
   border-radius:14px;
   color:rgba(255,255,255,.86);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
 }
+.code-copy-wrap{
+  position:relative;
+  max-width:100%;
+  margin:14px 0 0;
+}
+.code-copy-wrap .code-block{
+  margin:0;
+  padding-right:86px;
+}
 .code-block code{
   font-size:12.5px;
   line-height:1.7;
   color:inherit;
 }
+.copy-code{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:58px;
+  height:30px;
+  padding:0 10px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:9px;
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.72);
+  font-size:11.5px;
+  font-weight:600;
+  line-height:1;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.copy-code:hover,
+.copy-code:focus-visible{
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.2);
+  color:#fff;
+}
+.copy-code:focus-visible{
+  outline:2px solid var(--purple-300);
+  outline-offset:2px;
+}
+.copy-code.copied{
+  color:#100824;
+  background:var(--mint);
+  border-color:transparent;
+}
 .doc-card .code-block:first-child{margin-top:0}
+.doc-card .code-copy-wrap:first-child{margin-top:0}
 .pill-list,
 .mono-list{
   margin:14px 0 0;
@@ -792,6 +853,7 @@ footer a:hover{color:#fff}
   gap:8px;
 }
 .pill-list li{
+  max-width:100%;
   font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
   font-size:11.5px;
   color:var(--purple-700);
@@ -799,6 +861,7 @@ footer a:hover{color:#fff}
   border:1px solid var(--line-2);
   border-radius:999px;
   padding:5px 9px;
+  overflow-wrap:anywhere;
 }
 .mono-list li{
   font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
@@ -854,20 +917,40 @@ footer a:hover{color:#fff}
   .cli-feature-grid{grid-template-columns:1fr}
   .cli-feature-grid .doc-card,
   .cli-feature-grid .doc-card-wide{grid-column:auto}
+  .cli-hero-grid,
+  .cli-two-col{gap:34px}
 }
 @media (max-width:720px){
-  .cli-hero{padding:56px 0 72px}
-  .cli-section{padding:72px 0}
+  .cli-hero{padding:48px 0 64px}
+  .cli-section{padding:60px 0}
   .command-grid,
   .trouble-grid{grid-template-columns:1fr}
+  .cli-two-col,
+  .command-grid,
+  .cli-three-col,
+  .mcp-setup{gap:14px}
   .doc-card,
   .install-card,
-  .notice{padding:22px;border-radius:16px}
+  .notice{padding:20px;border-radius:16px}
   .code-block{
-    padding:15px 16px;
+    padding:14px 15px;
     border-radius:12px;
   }
+  .code-copy-wrap .code-block{padding-right:15px;padding-top:48px}
+  .copy-code{
+    top:10px;
+    right:10px;
+    height:28px;
+    min-width:54px;
+    font-size:11px;
+  }
   .code-block code{font-size:12px}
+  .cli-hero .eyebrow{
+    max-width:100%;
+    border-radius:16px;
+    flex-wrap:wrap;
+  }
+  .cli-hero .hero-ctas > a{max-width:100%}
 }
 
 /* Feature carousel (mobile) */
